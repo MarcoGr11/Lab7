@@ -1,11 +1,12 @@
 #include <iostream>
 #include "memory"
 
+using namespace std;
 
 template<typename T>
 struct Node{
     T data;
-    std::shared_ptr<Node<T>> next;
+    shared_ptr<Node<T>> next;
 
     Node(const T& value) : data(value), next(nullptr) {}
 
@@ -14,7 +15,7 @@ struct Node{
 template<typename T>
 class SingleList{
 private:
-    std::shared_ptr<Node<T>> head;
+    shared_ptr<Node<T>> head;
     size_t size;
 public:
 
@@ -43,8 +44,8 @@ public:
     bool Find(const T& value)const;
 
     //--- friend operators---
-    friend std::ostream& operator<<(std::ostream& os, const SingleList<T> list){
-        std::shared_ptr<Node<T>> current = list.head;
+    friend ostream& operator<<(ostream& os, const SingleList<T> list){
+        shared_ptr<Node<T>> current = list.head;
         while (current != nullptr){
             os << current->data<< " ";
             current = current->next;
@@ -52,46 +53,40 @@ public:
         return os;
     }
 
-    //--- iterators methods---
-//    Iterator Begin();
-//
-//    Iterator End();
-
-
 };
 
 
 template<typename T>
 void SingleList<T>::pushBack(const T& value) {
-    std::unique_ptr<Node<T>> newNode = std::make_unique<Node<T>>(value);
+    unique_ptr<Node<T>> newNode = make_unique<Node<T>>(value);
     if (head == nullptr) {
-        head = std::move(newNode);
+        head = move(newNode);
     } else {
-        std::shared_ptr<Node<T>> current = head;
+        shared_ptr<Node<T>> current = head;
         while (current->next != nullptr) {
             current = current->next;
         }
-        current->next = std::move(newNode);
+        current->next = move(newNode);
     }
     size++;
 }
 
 template<typename T>
 void SingleList<T>::pushFront(const T& value) {
-    std::unique_ptr<Node<T>> newNode = std::make_unique<Node<T>>(value);
-    newNode->next = std::move(head);
-    head = std::move(newNode);
+    unique_ptr<Node<T>> newNode = make_unique<Node<T>>(value);
+    newNode->next = move(head);
+    head = move(newNode);
     size++;
 }
 
 template<typename T>
 void SingleList<T>::popBack() {
     if (head == nullptr)
-        throw std::out_of_range("List is empty");
+        throw out_of_range("List is empty");
     if (head->next == nullptr) {
         head.reset();
     } else {
-        std::shared_ptr<Node<T>> current = head;
+        shared_ptr<Node<T>> current = head;
         while (current->next->next != nullptr) {
             current = current->next;
         }
@@ -103,16 +98,16 @@ void SingleList<T>::popBack() {
 template<typename T>
 void SingleList<T>::popFront() {
     if (head == nullptr)
-        throw std::out_of_range("List is empty");
-    head = std::move(head->next);
+        throw out_of_range("List is empty");
+    head = move(head->next);
     size--;
 }
 
 template<typename T>
 T& SingleList<T>::operator[](size_t index) const {
     if (index >= size)
-        throw std::out_of_range("Index out of range");
-    std::shared_ptr<Node<T>> current = head;
+        throw out_of_range("Index out of range");
+    shared_ptr<Node<T>> current = head;
     for (size_t i = 0; i < index; ++i) {
         current = current->next;
     }
@@ -122,12 +117,12 @@ T& SingleList<T>::operator[](size_t index) const {
 template<typename T>
 void SingleList<T>::insertAt(size_t index, const T& value) {
     if (index > size)
-        throw std::out_of_range("Index out of range");
+        throw out_of_range("Index out of range");
     if (index == 0) {
         pushFront(value);
     } else {
-        std::shared_ptr<Node<T>> newNode = std::make_shared<Node<T>>(value);
-        std::shared_ptr<Node<T>> current = head;
+       shared_ptr<Node<T>> newNode = make_shared<Node<T>>(value);
+       shared_ptr<Node<T>> current = head;
         for (size_t i = 0; i < index - 1; ++i) {
             current = current->next;
         }
@@ -140,11 +135,11 @@ void SingleList<T>::insertAt(size_t index, const T& value) {
 template<typename T>
 void SingleList<T>::removeAt(size_t index) {
     if (index >= size)
-        throw std::out_of_range("Index out of range");
+        throw out_of_range("Index out of range");
     if (index == 0) {
         popFront();
     } else {
-        std::shared_ptr<Node<T>> current = head;
+        shared_ptr<Node<T>> current = head;
         for (size_t i = 0; i < index - 1; ++i) {
             current = current->next;
         }
@@ -164,7 +159,7 @@ bool SingleList<T>::isEmpty() const {
 }
 template<typename T>
 bool SingleList<T>::Find(const T& value) const {
-    std::shared_ptr<Node<T>> current = head;
+    shared_ptr<Node<T>> current = head;
     while (current != nullptr) {
         if (current->data == value) {
             return true;
