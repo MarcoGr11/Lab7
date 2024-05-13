@@ -20,23 +20,23 @@ private:
 public:
     DoubleList() : head(nullptr), tail(nullptr), size(0) {}
 
-    // Додавання елемента в кінець списку
+    // дод елемент в кінець 
     void pushBack(const T& value);
     
-    // Додавання елемента на початок списку
+    // дод елемента на почат
     void pushFront(const T& value);
 
-    // Видалення останнього елемента списку
+    // вид останнього елемента
     void popBack();
     
-    // Видалення першого елемента списку
+    // вид першого елемента 
     void popFront();
 
 
-    // Вставка елемента за заданим індексом
+    // вставка елемента за  задан індекс 
     void insertAt(size_t index, const T& value);
     
-    // Видалення елемента за заданим індексом
+    // видалення елемент за задан індекс
     void removeAt(size_t index);
 
     size_t Size() const { return size; }
@@ -45,9 +45,9 @@ public:
 
     bool Find(const T& value) const;
 
-    // Отримання елемента списку за індексом
+    // отрим елемента списку за індекс
     T& operator[](size_t index) const;
-    // Вивід списку у потік
+    // вивід списку у потік
     friend std::ostream& operator<<(std::ostream& os, const DoubleList<T>& list) {
         std::shared_ptr<Node2<T>> current = list.head;
         while (current != nullptr) {
@@ -59,7 +59,7 @@ public:
 
 };
 
-// Додавання елемента в кінець списку
+// дод елемента в кінець 
 template<typename T>
 void DoubleList<T>::pushBack(const T& value) {
     std::shared_ptr<Node2<T>> newNode = std::make_shared<Node2<T>>();
@@ -76,7 +76,7 @@ void DoubleList<T>::pushBack(const T& value) {
     size++;
 }
 
-// Додавання елемента на початок списку
+// дод елемента на початок 
 template<typename T>
 void DoubleList<T>::pushFront(const T& value) {
     std::shared_ptr<Node2<T>> newNode = std::make_shared<Node2<T>>();
@@ -92,7 +92,7 @@ void DoubleList<T>::pushFront(const T& value) {
     size++;
 }
 
-// Видалення останнього елемента списку
+// вид останнього елемента 
 template<typename T>
 void DoubleList<T>::popBack() {
     if (tail == nullptr)
@@ -106,7 +106,7 @@ void DoubleList<T>::popBack() {
     size--;
 }
 
-// Видалення першого елемента списку
+// вид першого елемента 
 template<typename T>
 void DoubleList<T>::popFront() {
     if (head == nullptr)
@@ -120,7 +120,7 @@ void DoubleList<T>::popFront() {
     size--;
 }
 
-// Вставка елемента за заданим індексом
+// встав елемента за заданим індексом
 template<typename T>
 void DoubleList<T>::insertAt(size_t index, const T& value) {
     if (index > size)
@@ -141,7 +141,7 @@ void DoubleList<T>::insertAt(size_t index, const T& value) {
     }
 }
 
-// Видалення елемента за заданим індексом
+// вид елемента за заданим індекс
 template<typename T>
 void DoubleList<T>::removeAt(size_t index) {
     if (index >= size)
@@ -158,7 +158,7 @@ void DoubleList<T>::removeAt(size_t index) {
     }
 }
 
-// Пошук елемента в списку
+// пошук елемента
 template<typename T>
 bool DoubleList<T>::Find(const T& value) const {
     std::shared_ptr<Node2<T>> current = head;
@@ -171,7 +171,7 @@ bool DoubleList<T>::Find(const T& value) const {
     return false;
 }
 
-// Отримання елемента списку за індексом
+// отрим елемента списку за індексом
 template<typename T>
 T& DoubleList<T>::operator[](size_t index) const {
     if (index >= size)
@@ -180,7 +180,7 @@ T& DoubleList<T>::operator[](size_t index) const {
     return current->data;
 }
 
-// Отримання вузла списку за індексом
+// отрим  вузла списку за індексом
 template<typename T>
 std::shared_ptr<Node2<T>> DoubleList<T>::getNode(size_t index) const {
     if (index >= size)

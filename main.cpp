@@ -11,12 +11,12 @@ int main() {
     sList.pushFront(5);
     cout << "Single-linked list after adding items: " << sList << endl;
 
-    // Видалення елементів
+    // видал елеметн 
     sList.popFront();
     sList.popBack();
     cout << "Single-linked list after deleting items: " << sList << endl;
 
-    // Доступ до елементу за індексом
+    // доступ до елемент за індекс
     if (!sList.isEmpty()) {
         cout << "Element at position 0: " << sList[0] << endl;
     }
@@ -26,12 +26,12 @@ int main() {
     dList.pushFront(25);
     cout << " A two-way list after adding items:" << dList <<endl;
 
-    // Видалення елементів
+    // видал елемент
     dList.popFront();
     dList.popBack();
     cout << "A double-valued list after deleting items: " << dList << endl;
 
-    // Доступ до елементу за індексом
+    // доступ  елемент за індекс
     if (!dList.isEmpty()) {
         cout << "Element at position 0: " << dList[0] << endl;
     }

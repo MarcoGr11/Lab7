@@ -1,60 +1,51 @@
 #include <iostream>
-#include <memory> // Для використання умних вказівників
+#include <memory>
 
-// Структура, що представляє вузол списку
 template<typename T>
 struct Node{
-    T data; // Дані, що зберігаються в вузлі
-    std::shared_ptr<Node<T>> next; // Вказівник на наступний вузол у списку
+    T data; 
+    std::shared_ptr<Node<T>> next; 
 
-    // Конструктор для створення нового вузла з заданим значенням
     Node(const T& value) : data(value), next(nullptr) {}
 
 };
 
-// Клас для роботи з однозв’язним списком
+
 template<typename T>
 class SingleList{
 private:
-    std::shared_ptr<Node<T>> head; // Вказівник на початок списку
-    size_t size; // Розмір списку
+    std::shared_ptr<Node<T>> head; 
+    size_t size;
 public:
 
-    // Конструктор за замовчуванням
     SingleList():head(nullptr),size(0){}
 
-    // Додавання елемента на початок списку
+    // дод елемент на поч 
     void pushFront(const T& value);
     
-    // Додавання елемента в кінець списку
+    // дод елемент в кінець 
     void pushBack(const T& value);
 
-    // Видалення першого елемента списку
+    // вид 1 елемент 
     void popFront();
     
-    // Видалення останнього елемента списку
+    // вид остан елемент
     void popBack();
 
-    // Перевантаження оператора доступу до елементів за індексом
+    // перевантаж оператор доступ до елемент  індекс
     T& operator[](size_t index)const;
 
 
-    // Вставка елемента за заданим індексом
     void insertAt(size_t index,const T& value);
     
-    // Видалення елемента за заданим індексом
     void removeAt(size_t index);
 
-    // Перевірка, чи список порожній
     bool isEmpty() const;
 
-    // Отримання розміру списку
     size_t Size() const;
 
-    // Пошук елемента в списку
     bool Find(const T& value)const;
 
-    // Вивід списку у потік
     friend std::ostream& operator<<(std::ostream& os, const SingleList<T> list){
         std::shared_ptr<Node<T>> current = list.head;
         while (current != nullptr){
@@ -67,7 +58,7 @@ public:
 };
 
 
-// Додавання елемента в кінець списку
+// дод елемент в кінець 
 template<typename T>
 void SingleList<T>::pushBack(const T& value) {
     std::unique_ptr<Node<T>> newNode = std::make_unique<Node<T>>(value);
@@ -83,7 +74,7 @@ void SingleList<T>::pushBack(const T& value) {
     size++;
 }
 
-// Додавання елемента на початок списку
+// додав елемент на початок 
 template<typename T>
 void SingleList<T>::pushFront(const T& value) {
     std::unique_ptr<Node<T>> newNode = std::make_unique<Node<T>>(value);
@@ -92,7 +83,7 @@ void SingleList<T>::pushFront(const T& value) {
     size++;
 }
 
-// Видалення останнього елемента списку
+// вид останнього елемента 
 template<typename T>
 void SingleList<T>::popBack() {
     if (head == nullptr)
@@ -109,7 +100,7 @@ void SingleList<T>::popBack() {
     size--;
 }
 
-// Видалення першого елемента списку
+// вид 1 елемента 
 template<typename T>
 void SingleList<T>::popFront() {
     if (head == nullptr)
@@ -118,7 +109,7 @@ void SingleList<T>::popFront() {
     size--;
 }
 
-// Отримання елемента списку за індексом
+// отрим елемент індексом
 template<typename T>
 T& SingleList<T>::operator[](size_t index) const {
     if (index >= size)
@@ -130,7 +121,7 @@ T& SingleList<T>::operator[](size_t index) const {
     return current->data;
 }
 
-// Вставка елемента за заданим індексом
+// вставка елемента заданим  індекс
 template<typename T>
 void SingleList<T>::insertAt(size_t index, const T& value) {
     if (index > size)
@@ -149,7 +140,7 @@ void SingleList<T>::insertAt(size_t index, const T& value) {
     }
 }
 
-// Видалення елемента за заданим індексом
+// вид елемент за заданим індексом
 template<typename T>
 void SingleList<T>::removeAt(size_t index) {
     if (index >= size)
@@ -166,19 +157,15 @@ void SingleList<T>::removeAt(size_t index) {
     }
 }
 
-// Отримання розміру списку
 template<typename T>
 size_t SingleList<T>::Size() const {
     return size;
 }
-
-// Перевірка, чи список порожній
+// перевір чи є порожн
 template<typename T>
 bool SingleList<T>::isEmpty() const {
     return size == 0;
 }
-
-// Пошук елемента в списку
 template<typename T>
 bool SingleList<T>::Find(const T& value) const {
     std::shared_ptr<Node<T>> current = head;
