@@ -1,5 +1,6 @@
-#include<iostream>
+#include <iostream>
 #include "DoubleList.h"
+#include "stackArray.h"
 
 template<typename T>
 class Stack {
